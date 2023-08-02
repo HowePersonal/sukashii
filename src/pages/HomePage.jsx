@@ -1,9 +1,9 @@
-import Display from '../components/Display.jsx'
+import RankedAiringDisplay from '../components/Display.jsx'
 
 function HomePage() {
     return (
         <div>
-            <Display />
+            <RankedAiringDisplay />
         </div>
     )
 }

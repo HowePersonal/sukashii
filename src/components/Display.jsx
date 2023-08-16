@@ -1,16 +1,23 @@
-import {useState} from 'react'
-import FilmBanner from './FilmDisplay.jsx';
+import {useState, useEffect} from 'react'
+import FilmRow from './FilmRow.jsx'
 import requestTopAnime from '../api/frontPageList.js'
 
 function RankedAiringDisplay() {
-    let RankedList = localStorage.getItem('topRankedairingAnime');
-    if (RankedList === null) {
-        RankedList = requestTopAnime('airing', 10);
-    }
-    console.log(RankedList);
+    const [rankedList, setRankedList] = useState([]);
+
+    useEffect(() => {
+        requestTopAnime('airing')
+            .then(data => {
+                setRankedList(data)
+            })
+            .catch(error => {
+                console.error("Error while fetching data: ", error)
+            })
+    }, [])
+
     return (
-        <div className='grid grid-rows-5'>
-            
+        <div>
+            <FilmRow animeList = {rankedList}/>
         </div>
     )
 }

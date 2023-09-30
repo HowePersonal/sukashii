@@ -5,12 +5,11 @@ async function requestTopAnime(ranking_type) {
     const rankedURI = `${proxyURL}/anime/ranked?ranking_type=${ranking_type}`;
     try {
         const response = await fetch(rankedURI, {
-            method: "GET",
+            method: "GET"
         })
 
-        const data = await response.json();
-        const animeList = data.data;
-
+        const animeList = await response.json();
+        
         return animeList.map(item => ({
             id: item.node.id,
             title: item.node.title,
